@@ -32,3 +32,6 @@
 *.xdy
 *.tdo
 *.pdf
+
+# for OMake
+*.omc
