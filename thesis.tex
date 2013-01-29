@@ -1,0 +1,100 @@
+%%% Copyright (c) 2011 @Whitethroat
+%%% Copyright (c) 2012 @shogo82148
+%%%
+%%% Permission is hereby granted, free of charge, to any person obtaining a copy
+%%% of this software and associated documentation files (the ``Software''), to deal
+%%% in the Software without restriction, including without limitation the rights
+%%% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%%% copies of the Software, and to permit persons to whom the Software is
+%%% furnished to do so, subject to the following conditions:
+%%%
+%%% The above copyright notice and this permission notice shall be included in
+%%% all copies or substantial portions of the Software.
+%%%
+%%% THE SOFTWARE IS PROVIDED ``AS IS'', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%%% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%%% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%%% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%%% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%%% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+%%% THE SOFTWARE.
+
+\documentclass[a4j,12pt,report]{jsbook}
+
+%%% 共通パッケージの読み込み (Required)
+\usepackage[dvipdfm]{graphicx} % 図の貼込みを可能にする (Susie Pluginを利用したdvioutのプレビューではdvioutオプションを指定)
+\usepackage{overcite} % 引用符を上付きにする
+\usepackage{kslab} % 知識システム研究室 卒業論文・修士論文用スタイル
+
+%%% オプションパッケージの読み込み (Optional)
+\usepackage{amsmath,amssymb} % AMS仕様の数学記号等
+\usepackage{textcomp} % 特殊記号などの補完
+
+%%% 図や表のキャプションを日本語 / 英語のどちらにするのか (Selective)
+\makeatletter
+% 英語
+%\def\fnum@figure{Fig. \thefigure}
+%\def\fnum@table{Table \thetable}
+% 日本語
+\def\fnum@figure{図\thefigure}
+\def\fnum@table{表\thetable}
+\makeatletter
+
+%%% 論文題目等 (Required)
+\title{論文題目} % 論文題目
+\advisor{先生の名前} % 先生の名前
+\studentid{学籍番号} % 著者の学籍番号
+\author{著者名} % 著者名
+\date{提出日} % 提出日
+
+%%% PDF ファイルのための設定 (Optional)
+\usepackage[dvipdfm,bookmarks=true,bookmarksnumbered=true,bookmarkstype=toc,pdfborder=0 0 0]{hyperref} % PDFとしてコンパイルした際に目次レベルの見出しにリンクを張る
+\hypersetup{a4paper=true,pdfpagemode=UseThumbs,pdfstartview=Fit}
+\hypersetup{ % PDFに表題などを埋め込むためのオプション
+  pdftitle={PDFタイトル},
+  pdfsubject={},
+  pdfauthor={著者名},
+  pdfkeywords={キーワード}
+}
+
+\begin{document}
+%%% 表紙 (Required)
+\maketitle
+
+%%% 和文概要 (Required)
+\abstractJA{
+和文概要をここに書く．
+}
+\clearpage
+
+%%% 目次 (Required)
+\pagenumbering{roman} % 目次のページ番号はローマ数字に
+\setcounter{page}{1}
+\tableofcontents
+\newpage
+
+%%% 本文 (Required)
+\chapter{序論}
+\pagenumbering{arabic} % 目次のページ番号をアラビア数字に
+\section{研究の背景}
+
+%%% 謝辞 (Required)
+\acknowledgement{謝辞的なもの}
+謝辞をここに書く．
+
+%%% 参考文献 (Required)
+\begin{thebibliography}{99}
+\bibitem{hogehoge}
+  hogehoge
+\end{thebibliography}
+
+%%% 関連発表 (Required)
+\begin{relatedworks}{9}
+\bibitem{homuhomu}
+  homuhomu
+\end{relatedworks}
+
+%%% 付録 (Optional)
+\appendix
+\chapter{付録的なもの}
+\end{document}

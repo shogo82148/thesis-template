@@ -1,0 +1,191 @@
+%%% Copyright (c) 2011 @Whitethroat
+%%% Copyright (c) 2012 @shogo82148
+%%%
+%%% Permission is hereby granted, free of charge, to any person obtaining a copy
+%%% of this software and associated documentation files (the ``Software''), to deal
+%%% in the Software without restriction, including without limitation the rights
+%%% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%%% copies of the Software, and to permit persons to whom the Software is
+%%% furnished to do so, subject to the following conditions:
+%%%
+%%% The above copyright notice and this permission notice shall be included in
+%%% all copies or substantial portions of the Software.
+%%%
+%%% THE SOFTWARE IS PROVIDED ``AS IS'', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%%% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%%% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%%% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%%% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%%% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+%%% THE SOFTWARE.
+
+
+%%% 基本的なページレイアウト
+\setlength{\textheight}{23.0truecm} % 本文領域の高さ
+\setlength{\textwidth}{15.5truecm} % 本文領域の幅
+\setlength{\topmargin}{-2.0truecm} % 用紙の上端から1インチ内側を基準として、そこからヘッダまでの距離
+\setlength{\headsep}{1.5truecm} % ヘッダと本文領域間の距離
+\setlength{\footskip}{1.5truecm} % 本文の最終行とフッタの下端との距離
+\setlength{\jot}{2truemm} % eqnarray 環境の行間に挿入するスペース
+\parindent 1.0zw % 行頭の字下げ幅
+\renewcommand{\baselinestretch}{1.2} % 行間を標準の1.2倍に
+
+%%% 引用符 (citation)
+\def\citeform#1{#1)}
+\def\@biblabel#1{\hfil (#1)}
+
+%%% 目次にどの段階まで表示するか (Selective)
+%\setcounter{tocdepth}{0} % 章まで
+%\setcounter{tocdepth}{1} % 節まで
+\setcounter{tocdepth}{2} % 項まで
+
+%%% 図や表のcaption
+\def\setcaption#1{\def\@captype{#1}}
+%\def\fnum@figure{Fig. \thefigure}
+%\def\fnum@table{Table \thetable}
+\def\fnum@figure{図\thefigure}
+\def\fnum@table{表\thetable}
+\long\def\@makecaption#1#2{
+\setbox\@tempboxa\hbox{#1\ #2}
+\ifdim \wd\@tempboxa > \hsize
+  \addtolength{\hsize}{-1.5cm}
+\hbox to\hsize{\hfil #1 \mbox{~} \begin{minipage}[t]{\hsize}\par\baselineskip 4mm\par #2 \end{minipage}\hfil}
+  \par
+\else \hbox to\hsize{\hfil\box\@tempboxa\hfil}
+\fi}
+
+%%% 指導教員の定義
+\def\advisor#1{\def\@advisor{#1}}
+
+%%% 学籍番号の定義
+\def\studentid#1{\def\@studentid{#1}}
+
+%%% \HUGEの定義
+\def\HUGE{\fontsize{30pt}{30pt}\selectfont}
+
+%%% 表紙
+\renewcommand{\maketitle}{
+\begin{titlepage}
+  \let\footnotesize\small
+  \let\footnoterule\relax
+  \let\footnote\thanks
+  \null\vfill
+{\HUGE
+\begin{center}
+  修　士　論　文
+\end{center}
+} % \HUGE
+\vfill
+{\Large
+\begin{center}
+  題　目\vspace{1zh}\\
+  \@title
+\end{center}
+\vspace{1zh}
+\begin{center}
+  指導教員\vspace{1zh}\\
+  \@advisor
+\end{center}
+\vspace{1zh}
+\begin{center}
+  著　者\vspace{1zh}\\
+  学籍番号\hspace{0.25zw}\@studentid\hspace{0.5zw}\@author
+\end{center}
+\vspace{1zh}
+\begin{center}
+  \@date
+\end{center}
+\vspace{1zh}
+} % Large
+{\LARGE
+\begin{center}
+  長岡技術科学大学大学院 \\
+  電気電子情報工学専攻 \\
+\end{center}
+% \par\vspace*{3\baselineskip}\par
+} % \LARGE
+\end{titlepage}
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\p@thanks\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+} % \maketitle
+
+%%% thebibliography環境の再定義
+\makeatletter
+\renewenvironment{thebibliography}[1]{%
+     \chapter*{\bibname
+        \@mkboth{\bibname}{\bibname}}%
+     \phantomsection
+     \addcontentsline{toc}{chapter}{\bibname}
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}
+\makeatother
+
+%%% relatedworks環境の定義（関連発表）
+\newcommand{\worksname}{関連発表}
+\makeatletter
+\newenvironment{relatedworks}[1]{%
+     \chapter*{\worksname
+        \@mkboth{\worksname}{\worksname}}%
+     \phantomsection
+     \addcontentsline{toc}{chapter}{\worksname}
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `relatedworks' environment}}%
+      \endlist}
+\makeatother
+
+%%% 和文概要
+\def\abstractJA{
+\chapter*{概要}
+\thispagestyle{empty}
+}
+
+%%% 謝辞
+\def\acknowledgement{
+\chapter*{謝辞}
+    \addcontentsline{toc}{chapter}{謝辞}%
+}
+
+%%% 見出し文字の変更
+\renewcommand{\contentsname}{目次}
+\renewcommand{\bibname}{参考文献}
+\renewcommand{\indexname}{索引}
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Table}
+\renewcommand{\appendixname}{付録}
