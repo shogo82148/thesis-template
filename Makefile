@@ -34,7 +34,7 @@ TEXDEPS = \
 
 all: $(DOCUMENT).pdf
 
-.PHONY: all archive archive-utf8 archive-sjis
+.PHONY: all archive archive-utf8 archive-sjis archive-euc
 .SUFFIXES: .dvi .pdf
 
 $(DOCUMENT).dvi: $(DOCUMENT).tex $(TEXDEPS)
@@ -43,9 +43,10 @@ $(DOCUMENT).dvi: $(DOCUMENT).tex $(TEXDEPS)
 .dvi.pdf:
 	$(DVIPDFM) $(DVIPDFMFLAGS) $<
 
-archive: archive-utf8 archive-sjis
+archive: archive-utf8 archive-sjis archive-euc
 archive-utf8: archive-utf8.zip
 archive-sjis: archive-sjis.zip
+archive-euc: archive-euc.zip
 
 archive-utf8.zip: $(DOCUMENT).tex $(TEXDEPS)
 	-mkdir archive-utf8
@@ -56,3 +57,8 @@ archive-sjis.zip: $(DOCUMENT).tex $(TEXDEPS)
 	-mkdir archive-sjis
 	for f in $?; do iconv -f UTF8 -t SJIS < $$f > archive-sjis/$$f; done
 	zip -ju $@ archive-utf8/*
+
+archive-euc.zip: $(DOCUMENT).tex $(TEXDEPS)
+	-mkdir archive-euc
+	for f in $?; do iconv -f UTF8 -t EUCJP < $$f > archive-euc/$$f; done
+	zip -ju $@ archive-euc/*
