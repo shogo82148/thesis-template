@@ -27,12 +27,17 @@ BIBTEXFLAGS = -kanji=utf-8
 
 DOCUMENT = thesis
 
+TEXDEPS = \
+	kslab.sty \
+	overcite.sty \
+	pxjahyper.sty
+
 all: $(DOCUMENT).pdf
 
 .PHONY: all
 .SUFFIXES: .dvi .pdf
 
-.tex.dvi:
+$(DOCUMENT).dvi: $(DOCUMENT).tex $(TEXDEPS)
 	$(LATEX) $(LATEXFLAGS) $<
 
 .dvi.pdf:

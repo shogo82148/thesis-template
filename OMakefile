@@ -27,6 +27,11 @@ BIBTEXFLAGS = -kanji=utf-8
 
 DOCUMENT = thesis
 
+TEXDEPS[] =
+	kslab.sty
+	overcite.sty
+	pxjahyper.sty
+
 LaTeXDocument($(DOCUMENT), $(DOCUMENT))
 
 .DEFAULT: $(DOCUMENT).pdf
