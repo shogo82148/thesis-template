@@ -28,6 +28,20 @@ platex -kanji=utf-8 thesis.tex
 dvipdfm -p a4 thesis
 ```
 
+## UTF-8以外の文字コードを使いたい方へ
+
+関連するファイルの文字コードを変換するスクリプトを同梱しておきました．
+以下のコマンドで変換できます．
+
+``` bash
+make archive-sjis # Shift-JISへ変換
+make archive-euc # EUC-JPへ変換
+```
+
+archive-sjis, archive-euc というディレクトリに
+Shift-JIS版とEUC-JP版がそれぞれ格納されます．
+環境に合わせてお好きな文字コードをご使用ください．
+
 ## ライセンス
 テンプレートはMITライセンスです．
 [overcite.sty](http://www.ctan.org/tex-archive/macros/latex/contrib/cite) および
