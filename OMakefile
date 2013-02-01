@@ -35,4 +35,12 @@ TEXDEPS[] =
 LaTeXDocument($(DOCUMENT), $(DOCUMENT))
 
 .DEFAULT: $(DOCUMENT).pdf
+.PHONY: archive archive-utf8
 
+archive: archive-utf8
+archive-utf8: archive-utf8.zip
+
+archive-utf8.zip: $(DOCUMENT).tex $(TEXDEPS)
+	-mkdir archive-utf8
+	cp $^ archive-utf8/
+	zip -ju $@ archive-utf8/*
