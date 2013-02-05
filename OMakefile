@@ -31,6 +31,7 @@ TEXDEPS[] =
 	kslab.sty
 	overcite.sty
 	pxjahyper.sty
+	thesis.bib
 
 LaTeXDocument($(DOCUMENT), $(DOCUMENT))
 
