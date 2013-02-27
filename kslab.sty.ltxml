@@ -10,6 +10,5 @@ DefEnvironment(
     '{relatedworks}',
     '');
 DefMacro('\hypersetup', '');
-DefMacro('\thechapter', '');
 DefMacro('\abstractJA', '');
 1;
