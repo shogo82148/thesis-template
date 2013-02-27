@@ -1,0 +1,4 @@
+use LaTeXML::Package;
+use strict;
+
+1;
