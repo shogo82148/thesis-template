@@ -1,0 +1,15 @@
+use LaTeXML::Package;
+use strict;
+
+DefMacro('\figref{}', '\figurename~\ref{#1}');
+DefMacro('\tabref{}', '\tablename~\ref{#1}');
+DefMacro('\advisor{}', '#1');
+DefMacro('\studentid{}', '#1');
+DefMacro('\acknowledgement', '謝辞');
+DefEnvironment(
+    '{relatedworks}',
+    '');
+DefMacro('\hypersetup', '');
+DefMacro('\thechapter', '');
+DefMacro('\abstractJA', '');
+1;
