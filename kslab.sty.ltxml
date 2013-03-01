@@ -5,7 +5,8 @@ DefMacro('\figref{}', '\figurename~\ref{#1}');
 DefMacro('\tabref{}', '\tablename~\ref{#1}');
 DefMacro('\advisor{}', '#1');
 DefMacro('\studentid{}', '#1');
-DefMacro('\acknowledgement', '\chapter*{謝辞}');
+DefConstructor('\acknowledgement', "<ltx:acknowledgements>");
+Tag("ltx:acknowledgements", autoClose=>1);
 DefEnvironment(
     '{relatedworks}',
     '');
