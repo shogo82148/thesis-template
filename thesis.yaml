@@ -94,6 +94,10 @@ latexcmd: platex --kanji=utf8
 # 数式画像作成時に使うコマンド。
 dvipscmd: dvips -q -S1 -i -E -j0
 
+# LaTeXMLのオプション
+latexml: latexml --quiet
+latexmlpost: latexmlpost --split -bibliography=thesis-bib.xml
+
 # デバッグ用
 #basedebug: true
 # debug: true
