@@ -10,6 +10,5 @@ Tag("ltx:acknowledgements", autoClose=>1);
 DefEnvironment(
     '{relatedworks}',
     '');
-DefMacro('\hypersetup', '');
 DefMacro('\abstractJA', '');
 1;
