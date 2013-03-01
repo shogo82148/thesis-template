@@ -3,12 +3,14 @@ use strict;
 
 DefMacro('\figref{}', '\figurename~\ref{#1}');
 DefMacro('\tabref{}', '\tablename~\ref{#1}');
-DefMacro('\advisor{}', '#1');
-DefMacro('\studentid{}', '#1');
+DefMacro('\advisor{}', '\@add@frontmatter{ltx:creator}[role=advisor]{\@personname{#1}}');
+DefConstructor('\@studentid{}',"^ <ltx:contact role='studentid'>#1</ltx:contact>");
+DefMacro('\studentid{}', '\@add@to@frontmatter{ltx:creator}{\@studentid{#1}}');
 DefConstructor('\acknowledgement', "<ltx:acknowledgements>");
 Tag("ltx:acknowledgements", autoClose=>1);
 DefEnvironment(
     '{relatedworks}',
     '');
-DefMacro('\abstractJA', '');
+DefConstructor('\abstract{}', '<ltx:abstract>#1</ltx:abstract>');
+DefConstructor('\abstractJA{}', '<ltx:abstract>#1</ltx:abstract>');
 1;
