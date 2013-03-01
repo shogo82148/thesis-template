@@ -2,7 +2,7 @@
 # このファイルはUTF-8エンコーディングで記述してください
 
 # ブック名(ファイル名になるもの。ASCII範囲の文字を使用)
-bookname: master-thesis
+bookname: thesis
 # 記述言語
 language: ja
 # 書名
@@ -14,7 +14,7 @@ title: 修士論文のテスト
 # isbn: ISBN。省略した場合はランダム生成したUUIDが入る
 
 # 著者名。複数人いる場合はYAMLの配列形式で指定できる
-aut: Kenshi Muto
+aut: 著者名
 
 # 以下はオプション(配列書式で複数指定可能)。a-が付いているものはcreator側、
 # 付いていないものはcontributor側(二次協力者)に入る
@@ -48,7 +48,7 @@ aut: Kenshi Muto
 # a-trl, trl: 翻訳者
 
 # rights: 権利表記
-rights: 2010 Kenshi Muto
+rights: 20xx your name
 # date: 刊行日(省略した場合は実行時の日付)
 # description: 説明
 # subject: 短い説明用タグ。配列で複数指定可
