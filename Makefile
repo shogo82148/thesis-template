@@ -35,6 +35,12 @@ TEXDEPS = \
 	overcite.sty \
 	pxjahyper.sty
 
+TEXMLDEPS = \
+	hyperref.sty.ltxml \
+	kslab.sty.ltxml \
+	overcite.sty.ltxml \
+	pxjahyper.sty.ltxml
+
 all: $(DOCUMENT).pdf
 
 .PHONY: all archive archive-utf8 archive-sjis archive-euc
@@ -49,7 +55,7 @@ $(DOCUMENT).dvi: $(DOCUMENT).tex $(TEXDEPS)
 thesis-bib.xml: thesis.bib
 	$(LATEXML) $(LATEXMLFLAGS) --dest=$@ $<
 
-thesis.epub: thesis-bib.xml thesis.yaml $(TEXDEPS)
+thesis.epub: thesis-bib.xml thesis.yaml $(TEXDEPS) $(TEXMLDEPS)
 	$(LATEX2EPUB) thesis.tex thesis.yaml
 
 archive: archive-utf8 archive-sjis archive-euc

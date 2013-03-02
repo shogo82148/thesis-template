@@ -35,6 +35,12 @@ TEXDEPS[] =
 	pxjahyper.sty
 	thesis.bib
 
+TEXMLDEPS = \
+	hyperref.sty.ltxml \
+	kslab.sty.ltxml \
+	overcite.sty.ltxml \
+	pxjahyper.sty.ltxml
+
 LaTeXDocument($(DOCUMENT), $(DOCUMENT))
 
 .DEFAULT: $(DOCUMENT).pdf
@@ -43,7 +49,7 @@ LaTeXDocument($(DOCUMENT), $(DOCUMENT))
 thesis-bib.xml: thesis.bib
 	$(LATEXML) $(LATEXMLFLAGS) --dest=$@ $^
 
-thesis.epub: thesis-bib.xml thesis.yaml $(TEXDEPS)
+thesis.epub: thesis-bib.xml thesis.yaml $(TEXDEPS) $(TEXMLDEPS)
 	$(LATEX2EPUB) thesis.tex thesis.yaml
 
 archive: archive-utf8
