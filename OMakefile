@@ -24,6 +24,8 @@ LATEXFLAGS = -kanji=utf-8 -halt-on-error
 DVIPDFMFLAGS = -p a4
 BIBTEX = pbibtex
 BIBTEXFLAGS = -kanji=utf-8
+LATEXMLFLAGS = --preload=url.sty
+LATEX2EPUB = latex2epub.rb
 
 DOCUMENT = thesis
 
@@ -33,10 +35,22 @@ TEXDEPS[] =
 	pxjahyper.sty
 	thesis.bib
 
+TEXMLDEPS = \
+	hyperref.sty.ltxml \
+	kslab.sty.ltxml \
+	overcite.sty.ltxml \
+	pxjahyper.sty.ltxml
+
 LaTeXDocument($(DOCUMENT), $(DOCUMENT))
 
 .DEFAULT: $(DOCUMENT).pdf
 .PHONY: archive archive-utf8
+
+thesis-bib.xml: thesis.bib
+	$(LATEXML) $(LATEXMLFLAGS) --dest=$@ $^
+
+thesis.epub: thesis-bib.xml thesis.yaml $(TEXDEPS) $(TEXMLDEPS)
+	$(LATEX2EPUB) thesis.tex thesis.yaml
 
 archive: archive-utf8
 archive-utf8: archive-utf8.zip

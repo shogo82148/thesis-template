@@ -35,3 +35,7 @@
 
 # for OMake
 *.omc
+
+# for latexml and latex2epub
+*.xml
+*.epub

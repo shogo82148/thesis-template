@@ -24,6 +24,9 @@ DVIPDFM = dvipdfm
 DVIPDFMFLAGS = -p a4
 BIBTEX = pbibtex
 BIBTEXFLAGS = -kanji=utf-8
+LATEXML = latexml
+LATEXMLFLAGS = --preload=url.sty
+LATEX2EPUB = latex2epub.rb
 
 DOCUMENT = thesis
 
@@ -31,6 +34,12 @@ TEXDEPS = \
 	kslab.sty \
 	overcite.sty \
 	pxjahyper.sty
+
+TEXMLDEPS = \
+	hyperref.sty.ltxml \
+	kslab.sty.ltxml \
+	overcite.sty.ltxml \
+	pxjahyper.sty.ltxml
 
 all: $(DOCUMENT).pdf
 
@@ -42,6 +51,12 @@ $(DOCUMENT).dvi: $(DOCUMENT).tex $(TEXDEPS)
 
 .dvi.pdf:
 	$(DVIPDFM) $(DVIPDFMFLAGS) $<
+
+thesis-bib.xml: thesis.bib
+	$(LATEXML) $(LATEXMLFLAGS) --dest=$@ $<
+
+thesis.epub: thesis-bib.xml thesis.yaml $(TEXDEPS) $(TEXMLDEPS)
+	$(LATEX2EPUB) thesis.tex thesis.yaml
 
 archive: archive-utf8 archive-sjis archive-euc
 archive-utf8: archive-utf8.zip
