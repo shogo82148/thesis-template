@@ -8,9 +8,9 @@ DefConstructor('\@studentid{}',"^ <ltx:contact role='studentid'>#1</ltx:contact>
 DefMacro('\studentid{}', '\@add@to@frontmatter{ltx:creator}{\@studentid{#1}}');
 DefConstructor('\acknowledgement', "<ltx:acknowledgements>");
 Tag("ltx:acknowledgements", autoClose=>1);
-DefEnvironment(
-    '{relatedworks}',
-    '');
+DefMacro('\worksname', '関連発表');
+DefMacro('\relatedworks{}', '\def\refname{\worksname}\thebibliography{#1}');
+DefMacro('\endrelatedworks', '\endthebibliography');
 DefConstructor('\abstract{}', '<ltx:abstract>#1</ltx:abstract>');
 DefConstructor('\abstractJA{}', '<ltx:abstract>#1</ltx:abstract>');
 1;
