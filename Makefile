@@ -55,7 +55,7 @@ $(DOCUMENT).dvi: $(DOCUMENT).tex $(TEXDEPS)
 thesis-bib.xml: thesis.bib
 	$(LATEXML) $(LATEXMLFLAGS) --dest=$@ $<
 
-thesis.epub: thesis-bib.xml thesis.yaml $(TEXDEPS) $(TEXMLDEPS)
+thesis.epub: thesis.tex thesis-bib.xml thesis.yaml $(TEXDEPS) $(TEXMLDEPS)
 	$(LATEX2EPUB) thesis.tex thesis.yaml
 
 archive: archive-utf8 archive-sjis archive-euc
